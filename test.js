@@ -19,3 +19,5 @@ console.log("\n search existing 67 \n");
 test.prettyPrint(test.find(67));
 console.log("\n search missing 8\n");
 test.prettyPrint(test.find(8));
+console.log("\n test levelOrder\n");
+test.levelOrder(console.log);

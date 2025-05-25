@@ -211,7 +211,16 @@ export class Tree {
         }
 
         try{
+            let queue = [];
+            queue.push(this.root);
 
+            while(queue[0] !== undefined && queue[0] !== null){
+                let curr =queue[0]
+                callback(curr.data);
+                if(curr.left !== null){queue.push(curr.left);}
+                if(curr.right !== null){queue.push(curr.right);}
+                queue.shift();
+            }
         }
         catch(e){
             console.error(e);
