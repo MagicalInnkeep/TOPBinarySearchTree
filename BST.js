@@ -86,10 +86,12 @@ export class Tree {
             }
     }
 
+    //Pretty print for the whole tree.
     logPrettyPrint(){
        this.prettyPrint(this.root);
     }
 
+    //Allows inserts of leafs. Unbalances the tree
     insert(value){
         const temp = new Node(value);
         
@@ -121,6 +123,7 @@ export class Tree {
         return this.root;
     }
 
+    //Deletes nodes from the tree. 
     delete(value){
         let curr = this.root;
         let prev = null;
@@ -180,6 +183,7 @@ export class Tree {
         return this.root;
     }
 
+    //Returns the BST from the searched node.
     find(value){
         let curr = this.root;
         let prev = null;
@@ -199,5 +203,19 @@ export class Tree {
         return curr;
     }
 
+    //Breadth-first level order traversal
+    levelOrder(callback){
+
+        if(!callback){
+            throw new Error("No callback function provided.");
+        }
+
+        try{
+
+        }
+        catch(e){
+            console.error(e);
+        }
+    }
 }
 
