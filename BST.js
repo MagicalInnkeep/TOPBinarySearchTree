@@ -226,5 +226,123 @@ export class Tree {
             console.error(e);
         }
     }
+    //Depth-first traversal
+    inOrder(callback){
+
+        if(!callback){
+            throw new Error("No callback function provided.");
+        }
+
+        try{
+            let s = [];
+            let curr = this.root;
+
+            while (curr !== null || s.length > 0) {
+
+                // Reach the left most Node of the curr Node
+                while (curr !== null) {
+
+                    // Place pointer to a tree node on
+                    // the stack before traversing
+                    // the node's left subtree
+                    s.push(curr);
+                    curr = curr.left;
+                }
+
+                // Current must be NULL at this point
+                curr = s.pop();
+                callback(curr.data);
+
+                // we have visited the node and its
+                // left subtree. Now, it's right
+                // subtree's turn
+                curr = curr.right;
+
+            }
+
+        }
+
+        catch(e){
+            console.error(e);
+        }
+    }
+
+    preOrder(callback){
+        if(!callback){
+            throw new Error("No callback function provided.");
+        }
+
+        try{
+            let s = [];
+            let curr = this.root;
+
+            while (curr !== null || s.length > 0) {
+
+                // Reach the left most Node of the curr Node
+                while (curr !== null) {
+
+                    // Place pointer to a tree node on
+                    // the stack before traversing
+                    // the node's left subtree
+                    callback(curr.data);
+                    s.push(curr);
+                    curr = curr.left;
+                }
+
+                // Current must be NULL at this point
+                curr = s.pop();
+                
+                // we have visited the node and its
+                // left subtree. Now, it's right
+                // subtree's turn
+                curr = curr.right;
+
+            }
+
+        }
+        catch(e){
+            console.error(e);
+        }
+    } 
+
+    postOrder(callback){
+        if(!callback){
+            throw new Error("No callback function provided.");
+        }
+
+        try{
+            let s1 = []; // preorder
+            let s2 = []; // postorder
+            let curr = this.root;
+    
+            if (curr !== null) {
+                s1.push(curr);
+            }
+    
+            while (s1.length > 0) {
+                curr = s1.pop();
+                s2.push(curr);
+    
+                if (curr.left !== null) {
+                    s1.push(curr.left);
+                }
+    
+                if (curr.right !== null) {
+                    s1.push(curr.right);
+                }
+            }
+    
+            while (s2.length > 0) {
+                curr = s2.pop();
+                callback(curr.data);
+            }
+
+        }
+
+        catch(e){
+            console.error(e);
+        }
+    }
+
 }
 
