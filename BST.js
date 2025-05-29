@@ -9,7 +9,7 @@ class Node {
     }
 }
 
-//Tree
+//Tree --purposely written without recursion.
 export class Tree {
     constructor(data){
         this.root = this.buildTree(data);
@@ -189,8 +189,6 @@ export class Tree {
         let prev = null;
 
         // Check if the data is actually present in the BST.
-        // The variable prev points to the parent of the data
-        // to be deleted.
         while (curr !== null && curr.data !== value) {
             prev = curr;
             if (value < curr.data) {
@@ -343,6 +341,36 @@ export class Tree {
             console.error(e);
         }
     }
+    
+    //Max amount of nodes till leaf
+    height(node){
+        let newNode = this.find(node);
+        let curr = newNode;
+        let hgtValue = 0;
+        let maxValue = 0;
+        let queue = [];
+
+        queue.push(newNode);
+
+        while(queue[0] !== undefined && queue[0] !== null){
+            let curr =queue[0]
+            hgtValue++;
+            if(curr.left == null && curr.right == null) {
+                maxValue = maxValue<=hgtValue? hgtValue : maxValue;
+                hgtValue--;
+            } 
+            if(curr.left !== null){queue.push(curr.left);}
+            if(curr.right !== null){queue.push(curr.right);}
+            queue.shift();
+        }
+
+
+        return curr!==null ? hgtValue : null;
+    }
+
+    //Amount of nodes till root
+    depth(node){}
+
 
 }
 

@@ -27,3 +27,5 @@ console.log("\n test preOrder\n");
 test.preOrder(console.log);
 console.log("\n test postOrder\n");
 test.postOrder(console.log);
+console.log("\n test height\n");
+console.log(test.height(9));
