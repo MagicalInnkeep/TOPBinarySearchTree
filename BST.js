@@ -344,32 +344,59 @@ export class Tree {
     
     //Max amount of nodes till leaf
     height(node){
+
         let newNode = this.find(node);
-        let curr = newNode;
-        let hgtValue = 0;
-        let maxValue = 0;
-        let queue = [];
-
-        queue.push(newNode);
-
-        while(queue[0] !== undefined && queue[0] !== null){
-            let curr =queue[0]
-            hgtValue++;
-            if(curr.left == null && curr.right == null) {
-                maxValue = maxValue<=hgtValue? hgtValue : maxValue;
-                hgtValue--;
-            } 
-            if(curr.left !== null){queue.push(curr.left);}
-            if(curr.right !== null){queue.push(curr.right);}
-            queue.shift();
+        // Base Case
+        if (newNode == null)
+            return 0;
+  
+        // Create an empty queue for level order traversal
+        let q = [];
+  
+        // Enqueue Root and initialize height
+        q.push(newNode);
+        let height = 0;
+  
+        while (1 == 1)
+        {
+            // nodeCount (queue size) indicates number of nodes
+            // at current level.
+            let nodeCount = q.length;
+            if (nodeCount == 0)
+                return height;
+            height++;
+  
+            // Dequeue all nodes of current level and Enqueue all
+            // nodes of next level
+            while (nodeCount > 0)
+            {
+                let newnode = q.shift();
+                if (newnode.left != null)
+                    q.push(newnode.left);
+                if (newnode.right != null)
+                    q.push(newnode.right);
+                nodeCount--;
+            }
         }
-
-
-        return curr!==null ? hgtValue : null;
     }
 
     //Amount of nodes till root
-    depth(node){}
+    depth(value){
+        let curr = this.root;
+        let depth = 1;
+
+        // Check if the data is actually present in the BST.
+        while (curr !== null && curr.data !== value) {
+           depth++;
+            if (value < curr.data) {
+                curr = curr.left;
+            } else {
+                curr = curr.right;
+            }
+        }
+        
+        return depth;
+    }
 
 
 }
