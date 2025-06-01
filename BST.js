@@ -383,9 +383,13 @@ export class Tree {
     //Amount of nodes till root
     depth(value){
         let curr = this.root;
+
+        if(this.find(value)===null){
+            return null;
+        }
+
         let depth = 1;
 
-        // Check if the data is actually present in the BST.
         while (curr !== null && curr.data !== value) {
            depth++;
             if (value < curr.data) {
@@ -398,6 +402,45 @@ export class Tree {
         return depth;
     }
 
+    isBalanced(){
+        let queue = [];
+            queue.push(this.root);
+
+            while(queue[0] !== undefined && queue[0] !== null){
+                let curr =queue[0]
+
+                if(curr.left !==null && curr.right !==null){
+                    //console.log(this.height(curr.left.data)+' '+this.height(curr.right.data))
+                    if(Math.abs(this.height(curr.left.data)-this.height(curr.right.data))>1){
+                        return false;
+                    };
+                }
+                if(curr.left !==null && curr.right ===null){
+                    //console.log(this.height(curr.left.data)+' null')
+                    if(this.height(curr.left.data)>1){
+                        return false;
+                    }
+                }
+                if(curr.right !==null && curr.left ===null){
+                    //console.log('null '+this.height(curr.right.data))
+                    if(this.height(curr.right.data)>1){
+                        return false;
+                    }
+                }
+                if(curr.left !== null){queue.push(curr.left);}
+                if(curr.right !== null){queue.push(curr.right);}
+                queue.shift();
+            }
+
+            return true;
+    }
+
+    rebalance(){
+        const array= []
+        this.inOrder((node)=> array.push(node));
+        this.root =this.buildTree(array);
+        
+    }
 
 }
 
